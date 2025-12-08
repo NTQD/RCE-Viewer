@@ -1,0 +1,87 @@
+STARTING 
+Initialized empty Git repository in E:/Lap trinh NET/REC_viewer/.git/
+error: No such remote: 'origin'
+warning: in the working copy of 'README.md', LF will be replaced by CRLF the next time Git touches it
+warning: adding embedded git repository: Remote-Command-Execution
+hint: You've added another git repository inside your current repository.
+hint: Clones of the outer repository will not contain the contents of
+hint: the embedded repository and will not know how to obtain it.
+hint: If you meant to add a submodule, use:
+hint: 
+hint: 	git submodule add <url> Remote-Command-Execution
+hint: 
+hint: If you added this path by mistake, you can remove it from the
+hint: index with:
+hint: 
+hint: 	git rm --cached Remote-Command-Execution
+hint: 
+hint: See "git help submodule" for more information.
+warning: in the working copy of 'Server/dist/README.TXT', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Server/src/server/core/ServerManager.java', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Server/src/server/db/CommandHistoryDAO.java', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'client_config.xml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'git_log.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'server_config.xml', LF will be replaced by CRLF the next time Git touches it
+[master (root-commit) d53eb67] project completed !
+ 52 files changed, 3879 insertions(+)
+ create mode 100644 Client.exe
+ create mode 100644 Logo_RCE.ico
+ create mode 100644 README.md
+ create mode 160000 Remote-Command-Execution
+ create mode 100644 Server.exe
+ create mode 100644 Server/build.xml
+ create mode 100644 Server/build/built-jar.properties
+ create mode 100644 Server/build/classes/.netbeans_automatic_build
+ create mode 100644 Server/build/classes/.netbeans_update_resources
+ create mode 100644 Server/build/classes/Server.class
+ create mode 100644 Server/build/classes/server/core/ServerManager$1.class
+ create mode 100644 Server/build/classes/server/core/ServerManager$ApproveCallback.class
+ create mode 100644 Server/build/classes/server/core/ServerManager$ServerEvents.class
+ create mode 100644 Server/build/classes/server/core/ServerManager.class
+ create mode 100644 Server/build/classes/server/db/AllowCommandDAO.class
+ create mode 100644 Server/build/classes/server/db/CommandHistoryDAO.class
+ create mode 100644 Server/build/classes/server/db/UserDAO.class
+ create mode 100644 Server/build/classes/server/db/dbConnect.class
+ create mode 100644 Server/build/classes/server/model/AllowCommand.class
+ create mode 100644 Server/build/classes/server/model/CommandHistory.class
+ create mode 100644 Server/build/classes/server/model/User.class
+ create mode 100644 Server/build/classes/server/ui/ServerDashboard$1.class
+ create mode 100644 Server/build/classes/server/ui/ServerDashboard$RoundedButton$1.class
+ create mode 100644 Server/build/classes/server/ui/ServerDashboard$RoundedButton.class
+ create mode 100644 Server/build/classes/server/ui/ServerDashboard$RoundedPanel.class
+ create mode 100644 Server/build/classes/server/ui/ServerDashboard.class
+ create mode 100644 Server/dist/README.TXT
+ create mode 100644 Server/dist/Server.jar
+ create mode 100644 Server/dist/lib/mssql-jdbc-13.2.1.jre11.jar
+ create mode 100644 Server/manifest.mf
+ create mode 100644 Server/nbproject/build-impl.xml
+ create mode 100644 Server/nbproject/genfiles.properties
+ create mode 100644 Server/nbproject/private/private.properties
+ create mode 100644 Server/nbproject/private/private.xml
+ create mode 100644 Server/nbproject/project.properties
+ create mode 100644 Server/nbproject/project.xml
+ create mode 100644 Server/src/Server.java
+ create mode 100644 Server/src/server/core/ServerManager.java
+ create mode 100644 Server/src/server/db/AllowCommandDAO.java
+ create mode 100644 Server/src/server/db/CommandHistoryDAO.java
+ create mode 100644 Server/src/server/db/UserDAO.java
+ create mode 100644 Server/src/server/db/dbConnect.java
+ create mode 100644 Server/src/server/model/AllowCommand.java
+ create mode 100644 Server/src/server/model/CommandHistory.java
+ create mode 100644 Server/src/server/model/User.java
+ create mode 100644 Server/src/server/ui/ServerDashboard.java
+ create mode 100644 client_config.xml
+ create mode 100644 git_log.txt
+ create mode 100644 launch4j.log
+ create mode 100644 server_config.xml
+ create mode 100644 setup_git.bat
+ create mode 100644 setup_git_v2.bat
+To https://github.com/NTQD/RCE-Viewer.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/NTQD/RCE-Viewer.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+DONE 

@@ -1,0 +1,29 @@
+<launch4jConfig>
+  <dontWrapJar>true</dontWrapJar>
+  <headerType>gui</headerType>
+  <outfile>E:\Lap trinh NET\REC_viewer\Server.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl>http://java.com/download</downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon>E:\Lap trinh NET\REC_viewer\Logo_RCE.ico</icon>
+  <classPath>
+    <mainClass>Server</mainClass>
+    <cp>E:\Lap trinh NET\REC_viewer\Server\dist\Server.jar</cp>
+    <cp>E:\Lap trinh NET\REC_viewer\Server\dist\lib\mssql-jdbc-13.2.1.jre11.jar</cp>
+  </classPath>
+  <jre>
+    <path></path>
+    <bundledJre64Bit>false</bundledJre64Bit>
+    <bundledJreAsFallback>false</bundledJreAsFallback>
+    <minVersion>1.8.0</minVersion>
+    <maxVersion></maxVersion>
+    <jdkPreference>preferJre</jdkPreference>
+    <runtimeBits>64/32</runtimeBits>
+  </jre>
+</launch4jConfig>
