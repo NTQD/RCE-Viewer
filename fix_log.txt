@@ -1,2 +1,81 @@
 STARTING FIX 
 rm 'Remote-Command-Execution'
+warning: in the working copy of 'git_log.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Remote-Command-Execution/src/remotecommandexecution/gui/ClientGui.java', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Remote-Command-Execution/src/remotecommandexecution/gui/CommandAdmin.java', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Remote-Command-Execution/src/remotecommandexecution/gui/HistoryForm.java', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Remote-Command-Execution/src/remotecommandexecution/gui/SignInForm.java', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'fix_log.txt', LF will be replaced by CRLF the next time Git touches it
+[main caa99cc] project completed !
+ Date: Mon Dec 8 20:42:03 2025 +0700
+ 66 files changed, 5942 insertions(+)
+ create mode 100644 Client.exe
+ create mode 100644 Logo_RCE.ico
+ create mode 100644 README.md
+ create mode 100644 Remote-Command-Execution/.gitignore
+ create mode 100644 Remote-Command-Execution/RemoteControlDB.sql
+ create mode 100644 Remote-Command-Execution/build.xml
+ create mode 100644 Remote-Command-Execution/manifest.mf
+ create mode 100644 Remote-Command-Execution/src/remotecommandexecution/RemoteCommandExecution.java
+ create mode 100644 Remote-Command-Execution/src/remotecommandexecution/client/Client.java
+ create mode 100644 Remote-Command-Execution/src/remotecommandexecution/gui/ClientGui.java
+ create mode 100644 Remote-Command-Execution/src/remotecommandexecution/gui/CommandAdmin.java
+ create mode 100644 Remote-Command-Execution/src/remotecommandexecution/gui/HistoryForm.java
+ create mode 100644 Remote-Command-Execution/src/remotecommandexecution/gui/LoginForm.java
+ create mode 100644 Remote-Command-Execution/src/remotecommandexecution/gui/SignInForm.java
+ create mode 100644 Remote-Command-Execution/src/remotecommandexecution/images/hehe.gif
+ create mode 100644 Remote-Command-Execution/src/remotecommandexecution/images/hehenho.gif
+ create mode 100644 Server.exe
+ create mode 100644 Server/build.xml
+ create mode 100644 Server/build/built-jar.properties
+ create mode 100644 Server/build/classes/.netbeans_automatic_build
+ create mode 100644 Server/build/classes/.netbeans_update_resources
+ create mode 100644 Server/build/classes/Server.class
+ create mode 100644 Server/build/classes/server/core/ServerManager$1.class
+ create mode 100644 Server/build/classes/server/core/ServerManager$ApproveCallback.class
+ create mode 100644 Server/build/classes/server/core/ServerManager$ServerEvents.class
+ create mode 100644 Server/build/classes/server/core/ServerManager.class
+ create mode 100644 Server/build/classes/server/db/AllowCommandDAO.class
+ create mode 100644 Server/build/classes/server/db/CommandHistoryDAO.class
+ create mode 100644 Server/build/classes/server/db/UserDAO.class
+ create mode 100644 Server/build/classes/server/db/dbConnect.class
+ create mode 100644 Server/build/classes/server/model/AllowCommand.class
+ create mode 100644 Server/build/classes/server/model/CommandHistory.class
+ create mode 100644 Server/build/classes/server/model/User.class
+ create mode 100644 Server/build/classes/server/ui/ServerDashboard$1.class
+ create mode 100644 Server/build/classes/server/ui/ServerDashboard$RoundedButton$1.class
+ create mode 100644 Server/build/classes/server/ui/ServerDashboard$RoundedButton.class
+ create mode 100644 Server/build/classes/server/ui/ServerDashboard$RoundedPanel.class
+ create mode 100644 Server/build/classes/server/ui/ServerDashboard.class
+ create mode 100644 Server/dist/README.TXT
+ create mode 100644 Server/dist/Server.jar
+ create mode 100644 Server/dist/lib/mssql-jdbc-13.2.1.jre11.jar
+ create mode 100644 Server/manifest.mf
+ create mode 100644 Server/nbproject/build-impl.xml
+ create mode 100644 Server/nbproject/genfiles.properties
+ create mode 100644 Server/nbproject/private/private.properties
+ create mode 100644 Server/nbproject/private/private.xml
+ create mode 100644 Server/nbproject/project.properties
+ create mode 100644 Server/nbproject/project.xml
+ create mode 100644 Server/src/Server.java
+ create mode 100644 Server/src/server/core/ServerManager.java
+ create mode 100644 Server/src/server/db/AllowCommandDAO.java
+ create mode 100644 Server/src/server/db/CommandHistoryDAO.java
+ create mode 100644 Server/src/server/db/UserDAO.java
+ create mode 100644 Server/src/server/db/dbConnect.java
+ create mode 100644 Server/src/server/model/AllowCommand.java
+ create mode 100644 Server/src/server/model/CommandHistory.java
+ create mode 100644 Server/src/server/model/User.java
+ create mode 100644 Server/src/server/ui/ServerDashboard.java
+ create mode 100644 client_config.xml
+ create mode 100644 fix_git.bat
+ create mode 100644 fix_log.txt
+ create mode 100644 git_log.txt
+ create mode 100644 launch4j.log
+ create mode 100644 server_config.xml
+ create mode 100644 setup_git.bat
+ create mode 100644 setup_git_v2.bat
+branch 'main' set up to track 'origin/main'.
+To https://github.com/NTQD/RCE-Viewer.git
+ + d074dc6...caa99cc main -> main (forced update)
+DONE FIX 

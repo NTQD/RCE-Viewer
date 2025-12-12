@@ -15,8 +15,9 @@
   <manifest></manifest>
   <icon>E:\Lap trinh NET\REC_viewer\Logo_RCE.ico</icon>
   <classPath>
-    <mainClass>remotecommandexecution.gui.LoginForm</mainClass>
+    <mainClass>remotecommandexecution.RemoteCommandExecution</mainClass>
     <cp>E:\Lap trinh NET\REC_viewer\Remote-Command-Execution\dist\Remote_Command_Execution.jar</cp>
+    <cp>E:\Lap trinh NET\REC_viewer\Remote-Command-Execution\dist\lib\mssql-jdbc-13.2.1.jre11.jar</cp>
   </classPath>
   <jre>
     <path>%JAVA_HOME%;%PATH%</path>

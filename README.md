@@ -52,7 +52,7 @@ Thư mục gốc/
     -   **Server**: Nhập địa chỉ IP của máy chạy Server (nhập `localhost` nếu chạy trên cùng máy).
     -   **Port**: `12345` (hoặc port bạn đã cấu hình trên Server).
     -   **Username/Password**: Nhập tài khoản đã đăng ký hoặc được cấp.
-        -   *Tài khoản Admin (ví dụ)*: `admin1` / `password123` (tùy thuộc vào dữ liệu có sẵn).
+        -   *Tài khoản Admin (ví dụ)*: `admin2` / `test` (tùy thuộc vào dữ liệu có sẵn).
 3.  Nhấn **Login**.
 
 ---
