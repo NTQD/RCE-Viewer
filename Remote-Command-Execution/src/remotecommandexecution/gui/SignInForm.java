@@ -106,12 +106,12 @@ public class SignInForm extends JFrame {
         phoneField = new JTextField();
         styleRoundedField(phoneField, "Phone");
         usernameField = new JTextField();
-        styleRoundedField(usernameField, "User name");
+        styleRoundedField(usernameField, "Username");
         
         passwordField = new JPasswordField();
         confirmPasswordField = new JPasswordField();
-        JPanel passwordPanel = createPasswordFieldPanel(passwordField, "Password");
-        JPanel comfirmpasswordPanel = createPasswordFieldPanel(confirmPasswordField, "Confirm password");
+        JPanel passwordPanel = createPasswordFieldPanel(passwordField, "Confirm password");
+        JPanel comfirmpasswordPanel = createPasswordFieldPanel(confirmPasswordField, "Password");
 
         Color nextBaseColor = Color.decode("#0B0B45");
         RoundedButton nextButton = new RoundedButton("NEXT", nextBaseColor, Color.WHITE);
@@ -175,12 +175,12 @@ public class SignInForm extends JFrame {
         String confirmPassword = new String(confirmPasswordField.getPassword());
         
         if (fullName.isEmpty() || email.isEmpty() || username.isEmpty() || password.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Hãy điền đầy đủ thông tin", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
         if (!password.equals(confirmPassword)) {
-            JOptionPane.showMessageDialog(this, "Passwords do not match.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Mật khẩu không khớp", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -239,6 +239,8 @@ public class SignInForm extends JFrame {
         }).start();
     }
 
+    /* ------------------ ONLY CHANGED: eye icon implementation (copied from LoginForm style) ------------------ */
+
     private JPanel createPasswordFieldPanel(JPasswordField inputField, String placeholder) {
         JPanel fieldPanel = new JPanel(new BorderLayout());
         fieldPanel.setOpaque(false);
@@ -258,35 +260,85 @@ public class SignInForm extends JFrame {
     
         final char defaultEchoChar = inputField.getEchoChar();
 
-        JLabel eyeIcon = new JLabel("\uD83D\uDDA5 ");
-        eyeIcon.setFont(getAppFont(20, Font.PLAIN));
-        eyeIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        eyeIcon.setForeground(new Color(50, 50, 50)); 
-    
+        // create hidden and visible Icons drawn the same way as in LoginForm
+        int iconSize = 20;
+
+        Icon hiddenIcon = new Icon() {
+            @Override
+            public void paintIcon(Component c, Graphics g, int x, int y) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g2.setColor(new Color(50, 50, 50));
+                g2.setStroke(new BasicStroke(2));
+                // Draw eye outline
+                g2.drawArc(x, y + 5, 20, 10, 0, 180);
+                g2.drawArc(x, y + 5, 20, 10, 180, 180);
+                // Draw pupil
+                g2.fillOval(x + 7, y + 7, 6, 6);
+                g2.dispose();
+            }
+
+            @Override
+            public int getIconWidth() {
+                return iconSize;
+            }
+
+            @Override
+            public int getIconHeight() {
+                return iconSize;
+            }
+        };
+
+        Icon visibleIcon = new Icon() {
+            @Override
+            public void paintIcon(Component c, Graphics g, int x, int y) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g2.setColor(Color.GRAY);
+                g2.setStroke(new BasicStroke(2));
+                // Draw eye outline (two arcs to make eye shape)
+                g2.drawArc(x, y + 5, 20, 10, 0, 180);
+                g2.drawArc(x, y + 5, 20, 10, 180, 180);
+                // Draw pupil
+                g2.fillOval(x + 7, y + 7, 6, 6);
+                // Draw slash (for hidden)
+                g2.drawLine(x + 2, y + 18, x + 18, y + 2);
+                g2.dispose();
+            }
+
+            @Override
+            public int getIconWidth() {
+                return iconSize;
+            }
+
+            @Override
+            public int getIconHeight() {
+                return iconSize;
+            }
+        };
+
+        JLabel eyeIcon = new JLabel(hiddenIcon);
+        eyeIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        eyeIcon.setBorder(new EmptyBorder(0, 5, 0, 10));
+
         eyeIcon.addMouseListener(new MouseAdapter() {
-            boolean isShowing = false;
+            boolean show = false;
+
             @Override
             public void mouseClicked(MouseEvent e) {
-                isShowing = !isShowing;
-                if (isShowing) {
-                    inputField.setEchoChar((char) 0);
-                    eyeIcon.setText(" \uD83D\uDDA5 ");
-                } else {
-                    inputField.setEchoChar(defaultEchoChar);
-                    eyeIcon.setText(" \uD83D\uDDA5 ");
-                }
+                show = !show;
+                inputField.setEchoChar(show ? (char) 0 : defaultEchoChar);
+                eyeIcon.setIcon(show ? visibleIcon : hiddenIcon);
             }
         });
 
-        JPanel eyePanel = new JPanel(new BorderLayout());
-        eyePanel.setOpaque(false);
-        eyePanel.add(eyeIcon, BorderLayout.CENTER);
-    
         fieldPanel.add(inputField, BorderLayout.CENTER);
-        fieldPanel.add(eyePanel, BorderLayout.EAST);
+        fieldPanel.add(eyeIcon, BorderLayout.EAST);
 
         return fieldPanel;
     }
+
+    /* ------------------ END OF CHANGED SECTION ------------------ */
 
     class RoundedButton extends JButton {
         private Color baseColor;
@@ -354,7 +406,6 @@ public class SignInForm extends JFrame {
             g2.dispose();
         }
     }
-
 
     public static void main(String[] args) {
         try { UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel"); }  

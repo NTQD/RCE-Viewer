@@ -250,19 +250,17 @@ public class LoginForm extends JFrame {
 
         // Drawer for icon
         Icon hiddenIcon = new Icon() {
-            @Override
+                 @Override
             public void paintIcon(Component c, Graphics g, int x, int y) {
                 Graphics2D g2 = (Graphics2D) g.create();
                 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                g2.setColor(Color.GRAY);
+                g2.setColor(new Color(50, 50, 50));
                 g2.setStroke(new BasicStroke(2));
                 // Draw eye outline
                 g2.drawArc(x, y + 5, 20, 10, 0, 180);
                 g2.drawArc(x, y + 5, 20, 10, 180, 180);
                 // Draw pupil
                 g2.fillOval(x + 7, y + 7, 6, 6);
-                // Draw slash
-                g2.drawLine(x + 2, y + 18, x + 18, y + 2);
                 g2.dispose();
             }
 
@@ -277,18 +275,22 @@ public class LoginForm extends JFrame {
             }
         };
 
+
+
         Icon visibleIcon = new Icon() {
             @Override
             public void paintIcon(Component c, Graphics g, int x, int y) {
                 Graphics2D g2 = (Graphics2D) g.create();
                 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                g2.setColor(new Color(50, 50, 50));
+                g2.setColor(Color.GRAY);
                 g2.setStroke(new BasicStroke(2));
                 // Draw eye outline
                 g2.drawArc(x, y + 5, 20, 10, 0, 180);
                 g2.drawArc(x, y + 5, 20, 10, 180, 180);
                 // Draw pupil
                 g2.fillOval(x + 7, y + 7, 6, 6);
+                // Draw slash
+                g2.drawLine(x + 2, y + 18, x + 18, y + 2);
                 g2.dispose();
             }
 
