@@ -23,7 +23,7 @@ public class ClientGui extends JFrame {
 
     private JTextArea onlineUsersArea;
     private JTextArea resultsArea;
-    
+
     private boolean isCurrentUserAdmin = false;
     private CommandAdmin adminForm = null;
     private HistoryForm historyForm = null;
@@ -59,7 +59,8 @@ public class ClientGui extends JFrame {
         mainPanel.add(topPanel, BorderLayout.NORTH);
 
         onlineUsersArea = createTextArea();
-        JScrollPane onlineUsersScroll = createTitledScrollPane(onlineUsersArea, "Online users:", getAppFont(14, Font.BOLD));
+        JScrollPane onlineUsersScroll = createTitledScrollPane(onlineUsersArea, "Online users:",
+                getAppFont(14, Font.BOLD));
         resultsArea = createTextArea();
         JScrollPane resultsScroll = createTitledScrollPane(resultsArea, "Results:", getAppFont(14, Font.BOLD));
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, onlineUsersScroll, resultsScroll);
@@ -77,10 +78,11 @@ public class ClientGui extends JFrame {
 
         RoundedButton cpuButton = new RoundedButton("Get CPU Usage", buttonBaseColor, Color.BLACK, borderColor);
         RoundedButton diskButton = new RoundedButton("Get Disk Space", buttonBaseColor, Color.BLACK, borderColor);
-        RoundedButton customCmdButton = new RoundedButton("Send Custom Command", buttonBaseColor, Color.BLACK, borderColor);
+        RoundedButton customCmdButton = new RoundedButton("Send Custom Command", buttonBaseColor, Color.BLACK,
+                borderColor);
         RoundedButton historyButton = new RoundedButton("History", buttonBaseColor, Color.BLACK, borderColor);
         RoundedButton adminButton = new RoundedButton("Admin", buttonBaseColor, Color.BLACK, borderColor);
-        
+
         adminButton.setVisible(isCurrentUserAdmin);
 
         cpuButton.addActionListener(e -> sendCommand("cpu"));
@@ -88,9 +90,9 @@ public class ClientGui extends JFrame {
         customCmdButton.addActionListener(e -> showCustomCommandDialog());
         historyButton.addActionListener(e -> {
             ensureHistoryForm();
-            historyForm.setVisible(true);
             historyForm.showLoadingMessage("Đang tải lịch sử...");
             requestHistory("");
+            historyForm.setVisible(true);
         });
         adminButton.addActionListener(e -> openAdminForm());
 
@@ -105,7 +107,8 @@ public class ClientGui extends JFrame {
         leftButtonPanel.setOpaque(false);
         RoundedButton logoutButton = new RoundedButton("Log Out", new Color(220, 80, 80), Color.WHITE, borderColor);
         logoutButton.addActionListener(e -> {
-            int choice = JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?", "Logout", JOptionPane.YES_NO_OPTION);
+            int choice = JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?", "Logout",
+                    JOptionPane.YES_NO_OPTION);
             if (choice == JOptionPane.YES_OPTION) {
                 close_app();
                 dispose();
@@ -119,7 +122,7 @@ public class ClientGui extends JFrame {
 
         add(mainPanel);
         startListenerThread();
-        
+
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -127,7 +130,7 @@ public class ClientGui extends JFrame {
             }
         });
     }
-    
+
     public void close_app() {
         try {
             if (out != null) {
@@ -140,7 +143,7 @@ public class ClientGui extends JFrame {
             System.err.println("Error closing client resources: " + ex.getMessage());
         }
     }
-    
+
     private void openAdminForm() {
         if (adminForm == null) {
             adminForm = new CommandAdmin(this, out);
@@ -189,7 +192,7 @@ public class ClientGui extends JFrame {
                                 if (parts.length == 4) {
                                     String decodedCommand = decodeBase64(parts[2]);
                                     String decodedResult = decodeBase64(parts[3]);
-                                    historyRows.add(new String[]{parts[0], parts[1], decodedCommand, decodedResult});
+                                    historyRows.add(new String[] { parts[0], parts[1], decodedCommand, decodedResult });
                                 }
                             }
                             historyLine = in.readLine();
@@ -202,7 +205,7 @@ public class ClientGui extends JFrame {
                         });
                         continue;
                     }
-                    
+
                     if (currentLine.equals("BEGIN_ADMIN_CMDS")) {
                         List<String> commandRows = new ArrayList<>();
                         String cmdLine = in.readLine();
@@ -216,14 +219,14 @@ public class ClientGui extends JFrame {
                         }
                         continue;
                     }
-                    
+
                     if (currentLine.equals("ALLOW_ADDED") || currentLine.equals("ALLOW_DELETED")) {
                         if (adminForm != null && adminForm.isVisible()) {
                             adminForm.loadCommands();
                         }
                         continue;
                     }
-                    
+
                     if (currentLine.equals("ADD_ALLOW_DUPLICATE")) {
                         if (adminForm != null && adminForm.isVisible()) {
                             adminForm.showDuplicateError();
@@ -298,7 +301,8 @@ public class ClientGui extends JFrame {
 
     private JScrollPane createTitledScrollPane(Component view, String title, Font titleFont) {
         JScrollPane scroll = new JScrollPane(view);
-        TitledBorder tb = BorderFactory.createTitledBorder(new LineBorder(BORDER_COLOR, 1), title, TitledBorder.LEFT, TitledBorder.TOP);
+        TitledBorder tb = BorderFactory.createTitledBorder(new LineBorder(BORDER_COLOR, 1), title, TitledBorder.LEFT,
+                TitledBorder.TOP);
         tb.setTitleFont(titleFont);
         scroll.setBorder(tb);
         return scroll;
@@ -332,10 +336,26 @@ public class ClientGui extends JFrame {
             setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
 
             addMouseListener(new MouseAdapter() {
-                @Override public void mouseEntered(MouseEvent e) { currentColor = hoverColor; repaint(); }
-                @Override public void mouseExited(MouseEvent e) { currentColor = baseColor; repaint(); }
-                @Override public void mousePressed(MouseEvent e) { currentColor = pressedColor; repaint(); }
-                @Override public void mouseReleased(MouseEvent e) {
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    currentColor = hoverColor;
+                    repaint();
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    currentColor = baseColor;
+                    repaint();
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    currentColor = pressedColor;
+                    repaint();
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
                     currentColor = getBounds().contains(e.getPoint()) ? hoverColor : baseColor;
                     repaint();
                 }
@@ -356,8 +376,7 @@ public class ClientGui extends JFrame {
                     getWidth() - borderThickness,
                     getHeight() - borderThickness,
                     arcWidth,
-                    arcWidth
-            ));
+                    arcWidth));
             super.paintComponent(g2);
             g2.dispose();
         }

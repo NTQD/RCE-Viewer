@@ -5,10 +5,9 @@ import java.sql.DriverManager;
 
 public class dbConnect {
 
-    private static final String URL =
-        "jdbc:sqlserver://LAPTOP-S1S1TFI1\\SQLEXPRESS;"
-      + "databaseName=RemoteControlDB;"
-      + "encrypt=true;trustServerCertificate=true";
+    private static final String URL = "jdbc:sqlserver://localhost\\SQLEXPRESS;"
+            + "databaseName=RemoteControlDB;"
+            + "encrypt=true;trustServerCertificate=true";
 
     private static final String USER = "sa";
     private static final String PASS = "12";

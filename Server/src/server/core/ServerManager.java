@@ -250,7 +250,21 @@ public class ServerManager {
             String command;
 
             while (running && !socket.isClosed() && (command = in.readLine()) != null) {
+                String rawInput = command.trim();
+                String realCommand = rawInput;
 
+                // Nếu client nhập ID (chỉ toàn số)
+                if (rawInput.matches("\\d+")) {
+                    int cmdId = Integer.parseInt(rawInput);
+                    AllowCommand ac = allowDAO.getById(cmdId);
+
+                    if (ac == null || !ac.getIs_active()) {
+                        out.println("INVALID_COMMAND_ID");
+                        continue;
+                    }
+
+                    realCommand = ac.getCommand_text();
+                }
                 if (command.equals("GET_ALLOW_COMMANDS")) {
                     out.println("BEGIN_ADMIN_CMDS");
                     for (AllowCommand ac : allowDAO.getAll()) {
@@ -344,15 +358,15 @@ public class ServerManager {
                     continue;
                 }
 
-                if (!allowDAO.isCommandAllowed(command, user.isAdmin())) {
+                if (!allowDAO.isCommandAllowed(realCommand, user.isAdmin())) {
                     out.println("COMMAND_NOT_ALLOWED");
                     continue;
                 }
 
-                events.onLog("EXECUTING FROM " + user.getUsername() + ": " + command);
+                events.onLog("EXECUTING FROM " + user.getUsername() + ": " + realCommand);
                 Process p = null;
                 try {
-                    p = Runtime.getRuntime().exec("cmd.exe /c " + command);
+                    p = Runtime.getRuntime().exec("cmd.exe /c " + realCommand);
                     BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
                     String line;
                     StringBuilder result = new StringBuilder();

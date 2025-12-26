@@ -11,7 +11,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-
 public class SignInForm extends JFrame {
 
     private JTextField fullnameField;
@@ -26,30 +25,30 @@ public class SignInForm extends JFrame {
     }
 
     private Border createRoundedLineBorder() {
-        return new LineBorder(new Color(150, 150, 170), 2, true); 
+        return new LineBorder(new Color(150, 150, 170), 2, true);
     }
 
     public SignInForm() {
         setTitle("Remote Command Execution - Team 1");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1050, 650);  
+        setSize(1050, 650);
         setLocationRelativeTo(null);
         setResizable(true);
         JPanel mainPanel = new JPanel(new GridLayout(1, 2, 0, 0));
         add(mainPanel);
-        
+
         JPanel leftPanel = new JPanel();
-        leftPanel.setBackground(new Color(218, 222, 245)); 
+        leftPanel.setBackground(new Color(218, 222, 245));
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
         leftPanel.setBorder(new EmptyBorder(80, 50, 80, 50));
         leftPanel.add(Box.createVerticalGlue());
-        
+
         JPanel textWrapper = new JPanel();
         textWrapper.setOpaque(false);
         textWrapper.setLayout(new BoxLayout(textWrapper, BoxLayout.Y_AXIS));
-        
-        textWrapper.setAlignmentX(Component.LEFT_ALIGNMENT); 
-        
+
+        textWrapper.setAlignmentX(Component.LEFT_ALIGNMENT);
+
         JLabel teamLabel = new JLabel("Team 1");
         teamLabel.setFont(getAppFont(18, Font.PLAIN));
         teamLabel.setAlignmentX(Component.LEFT_ALIGNMENT); // Chữ căn trái
@@ -57,7 +56,7 @@ public class SignInForm extends JFrame {
         JLabel titleLabel = new JLabel("Remote Command Execution");
         titleLabel.setFont(getAppFont(24, Font.BOLD));
         titleLabel.setAlignmentX(Component.LEFT_ALIGNMENT); // Chữ căn trái
-        
+
         textWrapper.add(teamLabel);
         textWrapper.add(Box.createVerticalStrut(10));
         textWrapper.add(titleLabel);
@@ -79,12 +78,12 @@ public class SignInForm extends JFrame {
 
         JPanel imageWrapper = new JPanel(new FlowLayout(FlowLayout.CENTER));
         imageWrapper.setOpaque(false);
-        imageWrapper.setAlignmentX(Component.LEFT_ALIGNMENT); 
+        imageWrapper.setAlignmentX(Component.LEFT_ALIGNMENT);
         imageWrapper.add(imageLabel);
 
-        leftPanel.add(textWrapper); 
-        leftPanel.add(Box.createVerticalStrut(60)); 
-        leftPanel.add(imageWrapper); 
+        leftPanel.add(textWrapper);
+        leftPanel.add(Box.createVerticalStrut(60));
+        leftPanel.add(imageWrapper);
         leftPanel.add(Box.createVerticalStrut(30));
 
         leftPanel.add(Box.createVerticalGlue());
@@ -92,12 +91,12 @@ public class SignInForm extends JFrame {
 
         JPanel rightPanel = new JPanel();
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
-        rightPanel.setBorder(new EmptyBorder(70, 80, 70, 80));  
+        rightPanel.setBorder(new EmptyBorder(70, 80, 70, 80));
         rightPanel.setBackground(Color.WHITE);
 
         JLabel loginLabel = new JLabel("SIGN IN");
         loginLabel.setFont(getAppFont(22, Font.BOLD));
-        loginLabel.setAlignmentX(Component.CENTER_ALIGNMENT);  
+        loginLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         fullnameField = new JTextField();
         styleRoundedField(fullnameField, "Full name");
@@ -107,7 +106,13 @@ public class SignInForm extends JFrame {
         styleRoundedField(phoneField, "Phone");
         usernameField = new JTextField();
         styleRoundedField(usernameField, "Username");
-        
+
+        // New Server and Port fields
+        JTextField serverField = new JTextField("localhost");
+        styleRoundedField(serverField, "Server IP");
+        JTextField portField = new JTextField("12345");
+        styleRoundedField(portField, "Port");
+
         passwordField = new JPasswordField();
         confirmPasswordField = new JPasswordField();
         JPanel passwordPanel = createPasswordFieldPanel(passwordField, "Confirm password");
@@ -116,9 +121,9 @@ public class SignInForm extends JFrame {
         Color nextBaseColor = Color.decode("#0B0B45");
         RoundedButton nextButton = new RoundedButton("NEXT", nextBaseColor, Color.WHITE);
         nextButton.setFont(getAppFont(16, Font.BOLD));
-        nextButton.setMaximumSize(new Dimension(280, 48));  
-        nextButton.setAlignmentX(Component.CENTER_ALIGNMENT);  
-        nextButton.addActionListener(e -> performRegistration());
+        nextButton.setMaximumSize(new Dimension(280, 48));
+        nextButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        nextButton.addActionListener(e -> performRegistration(serverField.getText(), portField.getText()));
 
         RoundedButton backButton = new RoundedButton("Back to Login", new Color(230, 230, 230), Color.BLACK);
         backButton.setFont(getAppFont(16, Font.BOLD));
@@ -134,9 +139,16 @@ public class SignInForm extends JFrame {
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 0));
         buttonPanel.add(backButton);
         buttonPanel.add(nextButton);
-        
+
         rightPanel.add(loginLabel);
         rightPanel.add(Box.createVerticalStrut(20));
+
+        // Add Server/Port fields at the top
+        rightPanel.add(serverField);
+        rightPanel.add(Box.createVerticalStrut(15));
+        rightPanel.add(portField);
+        rightPanel.add(Box.createVerticalStrut(15));
+
         rightPanel.add(fullnameField);
         rightPanel.add(Box.createVerticalStrut(15));
         rightPanel.add(emailField);
@@ -152,67 +164,89 @@ public class SignInForm extends JFrame {
         rightPanel.add(buttonPanel);
         rightPanel.add(Box.createVerticalStrut(10));
 
-        mainPanel.add(rightPanel);
+        JScrollPane scrollPane = new JScrollPane(rightPanel);
+        scrollPane.setBorder(null);
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+
+        mainPanel.add(scrollPane);
     }
-    
+
     private void styleRoundedField(JTextField field, String placeholder) {
         field.setFont(getAppFont(15, Font.PLAIN));
         field.setMaximumSize(new Dimension(Integer.MAX_VALUE, 50));
         field.setBorder(BorderFactory.createTitledBorder(
-                createRoundedLineBorder(),  
+                createRoundedLineBorder(),
                 placeholder,
-                TitledBorder.LEFT, TitledBorder.TOP,  
-                getAppFont(13, Font.PLAIN),  
+                TitledBorder.LEFT, TitledBorder.TOP,
+                getAppFont(13, Font.PLAIN),
                 new Color(100, 100, 100)));
         field.setBackground(Color.WHITE);
     }
 
-    private void performRegistration() {
+    private void performRegistration(String serverIp, String portStr) {
         String fullName = fullnameField.getText().trim();
         String email = emailField.getText().trim();
         String username = usernameField.getText().trim();
         String password = new String(passwordField.getPassword());
         String confirmPassword = new String(confirmPasswordField.getPassword());
-        
-        if (fullName.isEmpty() || email.isEmpty() || username.isEmpty() || password.isEmpty()) {
+
+        if (fullName.isEmpty() || email.isEmpty() || username.isEmpty() || password.isEmpty() || serverIp.isEmpty()
+                || portStr.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Hãy điền đầy đủ thông tin", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
+        if (username.length() < 3) {
+            JOptionPane.showMessageDialog(this, "Tên đăng nhập phải có ít nhất 3 ký tự!", "Lỗi Validation",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int port;
+        try {
+            port = Integer.parseInt(portStr.trim());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Port phải là số", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         if (!password.equals(confirmPassword)) {
             JOptionPane.showMessageDialog(this, "Mật khẩu không khớp", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         new Thread(() -> {
-            try (Socket socket = new Socket("localhost", 12345);
-                PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
-                
+            try (Socket socket = new Socket(serverIp.trim(), port);
+                    PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+                    BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
+
                 String serverResponse = in.readLine();
                 if (!"SERVER_READY".equals(serverResponse)) {
-                    SwingUtilities.invokeLater(() -> 
-                        JOptionPane.showMessageDialog(this, "Server not ready or invalid protocol.", "Connection Error", JOptionPane.ERROR_MESSAGE)
-                    );
+                    SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(this,
+                            "Server not ready or invalid protocol.", "Connection Error", JOptionPane.ERROR_MESSAGE));
                     return;
                 }
-                
+
                 String command = String.format("REGISTER %s %s %s %s", username, password, fullName, email);
                 out.println(command);
-                
+
                 serverResponse = in.readLine();
 
                 if (serverResponse == null) {
-                    SwingUtilities.invokeLater(() ->
-                        JOptionPane.showMessageDialog(this, "No response from server. Connection may have been closed.", "Error", JOptionPane.ERROR_MESSAGE)
-                    );
+                    SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(this,
+                            "No response from server. Connection may have been closed.", "Error",
+                            JOptionPane.ERROR_MESSAGE));
                     return;
                 }
 
                 if ("REGISTER_OK".equals(serverResponse)) {
                     SwingUtilities.invokeLater(() -> {
-                        JOptionPane.showMessageDialog(this, "Registration successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
-                        dispose(); 
+                        JOptionPane.showMessageDialog(this, "Registration successful!", "Success",
+                                JOptionPane.INFORMATION_MESSAGE);
+                        dispose();
+                        // Open Login Form with pre-filled data
+                        new LoginForm(serverIp, String.valueOf(port), username, password).setVisible(true);
                     });
                 } else {
                     final String finalResponse = serverResponse;
@@ -226,38 +260,40 @@ public class SignInForm extends JFrame {
                     } else {
                         userMessage = "Registration failed: " + finalResponse;
                     }
-                    SwingUtilities.invokeLater(() -> 
-                        JOptionPane.showMessageDialog(this, userMessage, "Error", JOptionPane.ERROR_MESSAGE)
-                    );
+                    SwingUtilities.invokeLater(
+                            () -> JOptionPane.showMessageDialog(this, userMessage, "Error", JOptionPane.ERROR_MESSAGE));
                 }
 
             } catch (Exception ex) {
-                SwingUtilities.invokeLater(() -> 
-                    JOptionPane.showMessageDialog(this, "Could not connect to server: " + ex.getMessage(), "Connection Error", JOptionPane.ERROR_MESSAGE)
-                );
+                SwingUtilities.invokeLater(
+                        () -> JOptionPane.showMessageDialog(this, "Could not connect to server: " + ex.getMessage(),
+                                "Connection Error", JOptionPane.ERROR_MESSAGE));
             }
         }).start();
     }
 
-    /* ------------------ ONLY CHANGED: eye icon implementation (copied from LoginForm style) ------------------ */
+    /*
+     * ------------------ ONLY CHANGED: eye icon implementation (copied from
+     * LoginForm style) ------------------
+     */
 
     private JPanel createPasswordFieldPanel(JPasswordField inputField, String placeholder) {
         JPanel fieldPanel = new JPanel(new BorderLayout());
         fieldPanel.setOpaque(false);
-        fieldPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 50)); 
+        fieldPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 50));
 
         TitledBorder titledBorder = BorderFactory.createTitledBorder(
-                createRoundedLineBorder(), 
+                createRoundedLineBorder(),
                 placeholder,
-                TitledBorder.LEFT, TitledBorder.TOP, 
-                getAppFont(13, Font.PLAIN), 
+                TitledBorder.LEFT, TitledBorder.TOP,
+                getAppFont(13, Font.PLAIN),
                 new Color(100, 100, 100));
         fieldPanel.setBorder(titledBorder);
 
         inputField.setFont(getAppFont(15, Font.PLAIN));
         inputField.setBackground(Color.WHITE);
-        inputField.setBorder(new EmptyBorder(10, 5, 5, 5)); 
-    
+        inputField.setBorder(new EmptyBorder(10, 5, 5, 5));
+
         final char defaultEchoChar = inputField.getEchoChar();
 
         // create hidden and visible Icons drawn the same way as in LoginForm
@@ -345,37 +381,53 @@ public class SignInForm extends JFrame {
         private Color hoverColor;
         private Color pressedColor;
         private Color currentColor;
-        private final int arcWidth = 30;  
+        private final int arcWidth = 30;
 
         public RoundedButton(String text, Color base, Color fg) {
             super(text);
             this.baseColor = base;
             this.setForeground(fg);
-            
+
             if (base == Color.WHITE) {
                 this.hoverColor = new Color(240, 240, 240);
                 this.pressedColor = new Color(220, 220, 220);
             } else {
-                this.hoverColor = base.darker().darker();  
+                this.hoverColor = base.darker().darker();
                 this.pressedColor = base.brighter();
             }
-            
+
             this.currentColor = baseColor;
-            
+
             setOpaque(false);
             setContentAreaFilled(false);
             setFocusPainted(false);
             setCursor(new Cursor(Cursor.HAND_CURSOR));
-            
-            this.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));  
+
+            this.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
 
             addMouseListener(new MouseAdapter() {
-                @Override public void mouseEntered(MouseEvent e) { currentColor = hoverColor; repaint(); }
-                @Override public void mouseExited(MouseEvent e) { currentColor = baseColor; repaint(); }
-                @Override public void mousePressed(MouseEvent e) { currentColor = pressedColor; repaint(); }
-                @Override public void mouseReleased(MouseEvent e) {  
-                    currentColor = getBounds().contains(e.getPoint()) ? hoverColor : baseColor;  
-                    repaint();  
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    currentColor = hoverColor;
+                    repaint();
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    currentColor = baseColor;
+                    repaint();
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    currentColor = pressedColor;
+                    repaint();
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                    currentColor = getBounds().contains(e.getPoint()) ? hoverColor : baseColor;
+                    repaint();
                 }
             });
         }
@@ -384,21 +436,20 @@ public class SignInForm extends JFrame {
         protected void paintComponent(Graphics g) {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            
+
             g2.setColor(currentColor);
             g2.fill(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), arcWidth, arcWidth));
 
             Border border = getBorder();
             if (border instanceof LineBorder) {
                 LineBorder lb = (LineBorder) border;
-                if (currentColor.equals(baseColor)) { 
+                if (currentColor.equals(baseColor)) {
                     g2.setColor(lb.getLineColor());
-                    g2.setStroke(new BasicStroke(lb.getThickness()));  
+                    g2.setStroke(new BasicStroke(lb.getThickness()));
                     g2.draw(new RoundRectangle2D.Double(
-                        lb.getThickness() / 2.0, lb.getThickness() / 2.0,  
-                        getWidth() - lb.getThickness(), getHeight() - lb.getThickness(),  
-                        arcWidth, arcWidth
-                    ));
+                            lb.getThickness() / 2.0, lb.getThickness() / 2.0,
+                            getWidth() - lb.getThickness(), getHeight() - lb.getThickness(),
+                            arcWidth, arcWidth));
                 }
             }
 
@@ -408,9 +459,11 @@ public class SignInForm extends JFrame {
     }
 
     public static void main(String[] args) {
-        try { UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel"); }  
-        catch (Exception ignored) {}
-        
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (Exception ignored) {
+        }
+
         SwingUtilities.invokeLater(() -> new SignInForm().setVisible(true));
     }
 }

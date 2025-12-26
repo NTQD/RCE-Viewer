@@ -29,6 +29,14 @@ public class LoginForm extends JFrame {
         return new LineBorder(new Color(150, 150, 170), 2, true);
     }
 
+    public LoginForm(String server, String port, String username, String password) {
+        this();
+        serverField.setText(server);
+        portField.setText(port);
+        usernameField.setText(username);
+        passwordField.setText(password);
+    }
+
     public LoginForm() {
         setTitle("Remote Command Execution - Team 1");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -250,7 +258,7 @@ public class LoginForm extends JFrame {
 
         // Drawer for icon
         Icon hiddenIcon = new Icon() {
-                 @Override
+            @Override
             public void paintIcon(Component c, Graphics g, int x, int y) {
                 Graphics2D g2 = (Graphics2D) g.create();
                 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -274,8 +282,6 @@ public class LoginForm extends JFrame {
                 return iconSize;
             }
         };
-
-
 
         Icon visibleIcon = new Icon() {
             @Override
